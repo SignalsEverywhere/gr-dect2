@@ -32,7 +32,8 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     console.py
-    DESTINATION ${GR_PYTHON_DIR}/dect2
+    DESTINATION
+    ${GR_PYTHON_DIR}/dect2
 )
 
 ########################################################################

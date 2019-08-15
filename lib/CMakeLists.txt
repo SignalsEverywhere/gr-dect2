@@ -22,8 +22,6 @@
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
 
-include_directories(${Boost_INCLUDE_DIR})
-link_directories(${Boost_LIBRARY_DIRS})
 list(APPEND dect2_sources
     phase_diff_impl.cc
     packet_decoder_impl.cc
@@ -38,6 +36,11 @@ endif(NOT dect2_sources)
 add_library(gnuradio-dect2 SHARED ${dect2_sources})
 target_link_libraries(gnuradio-dect2 ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES})
 set_target_properties(gnuradio-dect2 PROPERTIES DEFINE_SYMBOL "gnuradio_dect2_EXPORTS")
+target_include_directories(gnuradio-dect2
+    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
+    PUBLIC $<BUILD_INTERFACE:${Boost_INCLUDE_DIR}>
+    PUBLIC $<INSTALL_INTERFACE:include>
+  )
 
 if(APPLE)
     set_target_properties(gnuradio-dect2 PROPERTIES
